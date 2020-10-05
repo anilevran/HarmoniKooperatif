@@ -8,6 +8,7 @@ public class Kasa extends JFrame {
         setTitle("Kasa Ekranı");
         setResizable(false);
         setVisible(true);
+        //deneme
     }
     
 }
