@@ -22,6 +22,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Stok extends JFrame {
     JPanel panel1,panel2,panel3,panel4,panel5,panel6,panel7,panel8;
@@ -69,7 +71,7 @@ public class Stok extends JFrame {
         try{
             String sql = "SELECT * FROM Stok";
             Statement stmt = null;
-            stmt = baglanti.conn.createStatement(); 
+            stmt = baglanti.conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()){
                 veriSayisi++;
@@ -545,15 +547,40 @@ public class Stok extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                    String sql = "UPDATE Stok SET Isim = ?, Adet = ?, Maliyet_Fiyati = ?, Satis_Fiyati = ?, WHERE Isim = ?";
+                try{
+                    PreparedStatement update = baglanti.conn.prepareStatement("UPDATE Stok SET Isim = ?, Adet = ?, Maliyet_Fiyati = ?, Satis_Fiyati = ? WHERE Isim = ?");
+                    
+                    update.setString(1, textfield7.getText());
+                    update.setInt(2,Integer.parseInt(textfield8.getText()));
+                    update.setInt(3,Integer.parseInt(textfield9.getText()));
+                    update.setInt(4,Integer.parseInt(textfield10.getText()));
+                    System.out.println(table.getValueAt(table.getSelectedRow(), 1).toString());
+                    update.setString(5, table.getValueAt(table.getSelectedRow(), 1).toString());
+                    update.executeUpdate();
+                    System.out.println("tamamdır");
                 
+                
+                }
+                catch (SQLException ex) {
+                    System.out.println("button6action");
+                }
             }
         });
         button7 = new JButton("Veriyi Sil");
         button7.addActionListener(new ActionListener() {
 
+            //yapım aşamasında
             @Override
             public void actionPerformed(ActionEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                try{
+                    System.out.println("1");
+                    PreparedStatement pstmt = baglanti.conn.prepareStatement("DELETE FROM Stok WHERE Isim = ?;");
+                    System.out.println("2");
+                    pstmt.setString(1, textfield7.getText());
+                }catch(SQLException ex){
+                    
+                }
             }
         });
         button6.setBounds(550,100,150,75);
