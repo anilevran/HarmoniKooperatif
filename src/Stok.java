@@ -24,14 +24,11 @@ import javax.swing.table.DefaultTableModel;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-<<<<<<< HEAD
-=======
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
->>>>>>> anil
 
 public class Stok extends JFrame {
     JPanel panel1,panel2,panel3,panel4,panel5,panel6,panel7,panel8;
@@ -625,21 +622,12 @@ public class Stok extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
-<<<<<<< HEAD
                     System.out.println("1");
                     PreparedStatement pstmt = baglanti.conn.prepareStatement("DELETE FROM Stok WHERE Isim = ?;");
                     System.out.println("2");
                     pstmt.setString(1, textfield7.getText());
                 }catch(SQLException ex){
-                    
-=======
-                    String asd = textfield7.getText();
-                    PreparedStatement pstmt = baglanti.conn.prepareStatement("DELETE FROM Stok WHERE Isim = ?");
-                    pstmt.setString(1, textfield7.getText());
-                    pstmt.executeUpdate();
-                }catch(SQLException ex){
                     System.out.println("buton7 action catch");
->>>>>>> anil
                 }
             }
         });
