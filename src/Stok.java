@@ -24,6 +24,14 @@ import javax.swing.table.DefaultTableModel;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
+=======
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
+>>>>>>> anil
 
 public class Stok extends JFrame {
     JPanel panel1,panel2,panel3,panel4,panel5,panel6,panel7,panel8;
@@ -42,6 +50,7 @@ public class Stok extends JFrame {
     String[][] data = new String[veriSayisi()][basliklar.length];
     JScrollPane tablepane;
     DefaultTableModel tm,tm2;
+    Font font1,font2;
     
     
     public Stok() {
@@ -110,8 +119,11 @@ public class Stok extends JFrame {
                     tm.addRow(row);
 
                 }
-            System.out.println("tablo dolduruldu");
+            
+            table.getTableHeader().setFont(font2);
+            table.setFont(font2);
             table.setModel(tm);
+            System.out.println("tablo dolduruldu");
             
         }catch(SQLException ex){
             System.out.println("sıkıntılı");
@@ -228,7 +240,24 @@ public class Stok extends JFrame {
         String[] newArray = lhSetColors.toArray(new String[ lhSetColors.size() ]);
         return newArray;
     }  
+    private Font createFont(String fileName,Float size){
+        Font tempFont = null;
+        try {
+            //create the font to use. Specify the size!
+            tempFont = Font.createFont(Font.TRUETYPE_FONT, new File(fileName)).deriveFont(size);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            //register the font
+            ge.registerFont(tempFont);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch(FontFormatException e) {
+            e.printStackTrace();
+        }
+        return tempFont;
+    }
     private void initObjects(){
+        font1 = createFont("AlfaSlabOne-Regular.ttf",20f);
+        font2 = createFont("AlfaSlabOne-Regular.ttf",14f);
         urun_comboboxItems = urunCombobox();
         malzeme_comboboxItems = malzemeCombobox();
         //setExtendedState(MAXIMIZED_BOTH); 
@@ -273,14 +302,16 @@ public class Stok extends JFrame {
         
         //panel3 içindeki objeler
         label1 = new JLabel("Ürün Stok Durumu");
-        label1.setFont(new Font(null, Font.BOLD, 20));
+        label1.setFont(font1);
         
-        label2 = new JLabel("Ürün Adı: ");
-        label2.setFont(new Font(null, Font.PLAIN, 17));
+        label2 = new JLabel("Ürün Kategorisi: ");
+        label2.setFont(font2);
         
         combobox = new JComboBox(urun_comboboxItems);
+        combobox.setFont(font2);
         
         button1 = new JButton("Ürün Stoğu Göster");
+        button1.setFont(font2);
         
         //panel3 - buton1 action
         button1.addActionListener(new ActionListener() {
@@ -297,44 +328,51 @@ public class Stok extends JFrame {
         panel3.add(combobox);
         panel3.add(button1);
         
-        label1.setBounds(150, 0,200,50);
+        label1.setBounds(150, 0,250,50);
         label2.setBounds(15, 75, 150, 50);
-        combobox.setBounds(150, 82, 150, 35);
+        combobox.setBounds(200, 82, 150, 35);
         button1.setBounds(300, 450, 150, 50);
         
         
         //panel4 içindeki objeler
         label3 = new JLabel("Ürün Stok Ekleme");
-        label3.setFont(new Font(null, Font.BOLD, 20));
+        label3.setFont(font1);
         
         label4 = new JLabel("Ürün Adı: ");
-        label4.setFont(new Font(null, Font.PLAIN, 17));
+        label4.setFont(font2);
         
         label5 = new JLabel("Ürün Adedi: ");
-        label5.setFont(new Font(null, Font.PLAIN, 17));
+        label5.setFont(font2);
         
         label6 = new JLabel("Ürün Maliyet Fiyatı: ");
-        label6.setFont(new Font(null, Font.PLAIN, 17));
+        label6.setFont(font2);
         
         label7 = new JLabel("Ürün Satış Fiyatı: ");
-        label7.setFont(new Font(null, Font.PLAIN, 17));
+        label7.setFont(font2);
         
         label23 = new JLabel("Ürün Kategorisi: ");
-        label23.setFont(new Font(null, Font.PLAIN, 17));
+        label23.setFont(font2);
         
         label24 = new JLabel("Yeni Kategori Girişi");
-        label24.setFont(new Font(null, Font.PLAIN, 17));
+        label24.setFont(font2);
         
         textfield1 = new JTextField("");
+        textfield1.setFont(font2);
         textfield2 = new JTextField("");
+        textfield2.setFont(font2);
         textfield3 = new JTextField("");
+        textfield3.setFont(font2);
         textfield4 = new JTextField("");
+        textfield4.setFont(font2);
         textfield11 = new JTextField("");
+        textfield11.setFont(font2);
         
         combobox4 = new JComboBox(urun_comboboxItems);
+        combobox4.setFont(font2);
         
         //panel4 - buton1 action
         button5 = new JButton("Yeni Kategori Ile Ekle");
+        button5.setFont(font2);
         button5.addActionListener(new ActionListener() {
 
             @Override
@@ -370,6 +408,7 @@ public class Stok extends JFrame {
         
         //panel4 - buton2 action
         button2 = new JButton("Ürün Stoğa Ekle");
+        button2.setFont(font2);
         button2.addActionListener(new ActionListener() {
 
             @Override
@@ -437,14 +476,16 @@ public class Stok extends JFrame {
         
         //panel5 içindeki objeler
         label8 = new JLabel("Malzeme Stok Durumu");
-        label8.setFont(new Font(null, Font.BOLD, 20));
+        label8.setFont(font1);
         
         label9 = new JLabel("Malzeme Adı: ");
-        label9.setFont(new Font(null, Font.PLAIN, 17));
+        label9.setFont(font2);
         
         combobox2 = new JComboBox(malzeme_comboboxItems);
+        combobox2.setFont(font2);
         
         button3 = new JButton("Malzeme Stoğu Göster");
+        button3.setFont(font2);
         
         button3.addActionListener(new ActionListener() {
 
@@ -467,21 +508,24 @@ public class Stok extends JFrame {
         
         //panel6 içindeki objeler
         label10 = new JLabel("Malzeme Stok Ekleme");
-        label10.setFont(new Font(null, Font.BOLD, 20));
+        label10.setFont(font1);
         
         label11 = new JLabel("Malzeme Adı: ");
-        label11.setFont(new Font(null, Font.PLAIN, 17));
+        label11.setFont(font2);
         
         label12 = new JLabel("Malzeme Birimi: ");
-        label12.setFont(new Font(null, Font.PLAIN, 17));
+        label12.setFont(font2);
         
         label13 = new JLabel("Malzeme Adedi: ");
-        label13.setFont(new Font(null, Font.PLAIN, 17));
+        label13.setFont(font2);
         
         textfield5 = new JTextField("");
+        textfield5.setFont(font2);
         textfield6 = new JTextField("");
+        textfield6.setFont(font2);
         
         button4 = new JButton("Ürün Stoğa Ekle");
+        button4.setFont(font2);
         
         //panel6 - buton 4 action
         button4.addActionListener(new ActionListener() {
@@ -504,6 +548,7 @@ public class Stok extends JFrame {
         });
         
         combobox3 = new JComboBox(birimItems);
+        combobox3.setFont(font2);
         
         panel6.add(label10);
         panel6.add(label11);
@@ -535,14 +580,19 @@ public class Stok extends JFrame {
         
         //panel 8 içindeki objeler
         label19 = new JLabel("İSİM");
+        label19.setFont(font2);
         label20 = new JLabel("ADET");
+        label20.setFont(font2);
         label21 = new JLabel("MALİYET FİYATI");
+        label21.setFont(font2);
         label22 = new JLabel("SATIŞ FİYATI");
+        label22.setFont(font2);
         label19.setBounds(100, 50, 100, 100);
         label20.setBounds(100, 150, 100, 100);
         label21.setBounds(100, 250, 100, 100);
         label22.setBounds(100, 350, 100, 100);
         button6 = new JButton("Veriyi Güncelle");
+        button6.setFont(font2);
         button6.addActionListener(new ActionListener() {
 
             @Override
@@ -568,27 +618,41 @@ public class Stok extends JFrame {
             }
         });
         button7 = new JButton("Veriyi Sil");
+        button7.setFont(font2);
         button7.addActionListener(new ActionListener() {
 
             //yapım aşamasında
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
+<<<<<<< HEAD
                     System.out.println("1");
                     PreparedStatement pstmt = baglanti.conn.prepareStatement("DELETE FROM Stok WHERE Isim = ?;");
                     System.out.println("2");
                     pstmt.setString(1, textfield7.getText());
                 }catch(SQLException ex){
                     
+=======
+                    String asd = textfield7.getText();
+                    PreparedStatement pstmt = baglanti.conn.prepareStatement("DELETE FROM Stok WHERE Isim = ?");
+                    pstmt.setString(1, textfield7.getText());
+                    pstmt.executeUpdate();
+                }catch(SQLException ex){
+                    System.out.println("buton7 action catch");
+>>>>>>> anil
                 }
             }
         });
         button6.setBounds(550,100,150,75);
         button7.setBounds(550,300,150,75);
         textfield7 = new JTextField(20);
+        textfield7.setFont(font2);
         textfield8 = new JTextField(20);
+        textfield8.setFont(font2);
         textfield9 = new JTextField(20);
+        textfield9.setFont(font2);
         textfield10 = new JTextField(20);
+        textfield10.setFont(font2);
         textfield7.setBounds(250, 83, 150, 32);
         textfield8.setBounds(250, 183, 150, 32);
         textfield9.setBounds(250, 283, 150, 32);
