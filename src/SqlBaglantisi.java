@@ -14,7 +14,7 @@ public class SqlBaglantisi {
             System.out.println("Baglanti Sağlandı");
             
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
     

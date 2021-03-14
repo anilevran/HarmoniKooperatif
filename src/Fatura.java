@@ -108,7 +108,7 @@ public Fatura() {
 
 
                  } catch (SQLException ex) {
-                     System.out.println("çalışmadı");
+                     System.out.println("Fatura ekle butonu çalışmadı");
                 }
             }
         });

@@ -27,13 +27,10 @@ import java.io.IOException;
 
 public class Stok extends JFrame {
     JPanel panel1,panel2,panel3,panel4,panel5,panel6,panel7,panel8;
-    JButton button1,button2,button3,button4,button5,button6,button7;
+    JButton button1,button2,button3,button4,button5,button6,button7,button8;
     JLabel label1,label2,label3,label4,label5,label6,label7,label8,label9,label10,label11,label12,label13,label14,label15,label16,label17,label18,label19,label20,label21,label22,label23,label24;
     JComboBox combobox,combobox2,combobox3,combobox4;
     JTextField textfield1,textfield2,textfield3,textfield4,textfield5,textfield6,textfield7,textfield8,textfield9,textfield10,textfield11;
-    /*String[] urun_comboboxItems = {"Bashful", "Doc", "Dopey",
-      "Grumpy", "Happy", "Sleepy",
-      "Sneezy"};*/
     String[] urun_comboboxItems,malzeme_comboboxItems;
     String[] birimItems = {"Metre", "Santimetre" , "Top" , "Kilogram" , "Gram" , "Adet"};
     JTable table;
@@ -469,6 +466,27 @@ public class Stok extends JFrame {
         
         button4 = new JButton("Malzeme Stoğa Ekle");
         button4.setFont(font2);
+        
+        button8 = new JButton("Yeni Kategori Ile Ekle");
+        button8.setFont(font2);
+        
+        button8.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    PreparedStatement pstmt = baglanti.conn.prepareStatement("INSERT INTO Stok2(Malzeme_adi,Malzeme_birimi,Malzeme_adedi) VALUES(?,?,?)");
+                    pstmt.setString(1, textfield5.getText());
+                    pstmt.setString(2,combobox3.getSelectedItem().toString());
+                    pstmt.setInt(3,Integer.parseInt(textfield6.getText()));
+                    pstmt.executeUpdate();
+                    
+                    System.out.println("Ürün Yeni Kategori Ile Stoğa Eklendi");
+                }catch (SQLException ex) {
+                    System.out.println("Ürün Yeni Kategori Ile Stoğa Eklenemedi");
+                    }
+                }
+            });
         button4.addActionListener(new ActionListener() {
 
             @Override
@@ -497,6 +515,7 @@ public class Stok extends JFrame {
         textfield5.setBounds(180, 85,200,35);
         combobox3.setBounds(180, 135,200,35);
         textfield6.setBounds(180, 185,200,35);
+        button8.setBounds(50, 450, 200, 50);
         
         panel6.add(label10);
         panel6.add(label11);
@@ -506,6 +525,7 @@ public class Stok extends JFrame {
         panel6.add(combobox3);
         panel6.add(textfield6);
         panel6.add(button4);
+        panel6.add(button8);
         
         //panel 7 içindeki objeler
         table = new JTable();
